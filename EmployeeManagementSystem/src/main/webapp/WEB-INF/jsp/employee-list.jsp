@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="css/style.css" />
 	<script>
 		function applyFilter(){
-			debugger;
 			var department=document.getElementById("departmentFilter").value;
 			var data={};
 			data['deparment']=department;
@@ -57,12 +56,9 @@
 						                    method: "GET",
 											data:data,
 						                    success: function (data) {
-												console.log(data);
 												let tableBody = $("#employeeTable tbody");
 												                       tableBody.empty(); // Clear previous data
 												                       data.forEach(function (employee) {
-																		console.log(employee.employeeId);
-																		console.log(${employee.name});
 																		
 																		
 												                           tableBody.append("<tr><td>"+
@@ -90,10 +86,13 @@
 		</script>
 </head>
 <body>
+	
+	<button type="button" onclick="addnew()">NewEmployee</button>
+	
 	<div>
 	    <label for="departmentFilter">Filter by Department: </label>
 	    <select id="departmentFilter">
-	        <option value="">All Departments</option>
+	        <option value="-1">All Departments</option>
 	        <!-- Add departments dynamically or manually -->
 	        <option value="IT">IT</option>
 	        <option value="HR">HR</option>
@@ -125,24 +124,21 @@
         <tbody></tbody>
     </table>
 	
-	<div id="paginationControls" style="text-align: center; margin-top: 20px;">
-	        <!-- Pagination buttons will be added dynamically -->
+	
 
     <script>
 		
-		let currentPage = 0;
-		const pageSize = 5;
+		
 		
         $(document).ready(function () {
             // Fetch and display employee data
-            fetchEmployees(currentPage, pageSize);
+            fetchEmployees();
 
             // Function to fetch employees
-            function fetchEmployees(page, size) {
+            function fetchEmployees() {
                 $.ajax({
                     url: "http://localhost:8080/api/employees/user",
                     method: "GET",
-					data: { pageNumber: page, pageSize: size },
                     success: function (data) {
 						console.log("hello00");
                         let tableBody = $("#employeeTable tbody");
@@ -165,7 +161,6 @@
                                 "</td></tr>"
                            );
                         });
-						updatePagination(data);
                     },
                     error: function (err) {
                         alert("Error fetching employees: " + err.responseText);
@@ -175,15 +170,7 @@
             }
 			
 			// Make functions global for pagination and other actions
-			function updatePagination(data) {
-			                const paginationDiv = $("#paginationControls");
-			                paginationDiv.empty();
-							console.log("lll");
-			                for (let i = 0; i < data.totalPages; i++) {
-			                    paginationDiv.append("<button class="+$(i === currentPage ? 'active' : '')+ 
-			                      "onclick="+fetchEmployees($(i)+','+ $(pageSize))+">"+${i + 1}+"</button>");
-			                }
-			            }
+			
 
             // Function to delete an employee
             window.deleteEmployee = function (id) {
@@ -208,7 +195,9 @@
             };
         });
 		
-		
+		function addnew() {
+				           window.location.href = "/index";
+				}
     </script>
 	
 	
