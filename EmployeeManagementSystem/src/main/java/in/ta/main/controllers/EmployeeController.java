@@ -1,6 +1,5 @@
 package in.ta.main.controllers;
 
-import java.lang.foreign.ValueLayout;
 import java.util.List;
 import java.util.Map;
 
@@ -17,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.ta.main.entities.Employee;
-import in.ta.main.service.EmployeeServiceImpl;
+import in.ta.main.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController 
 {
 	@Autowired
-	EmployeeServiceImpl employeeService;
+	EmployeeService employeeService;
 	
 	@PostMapping("/user")
 	public Employee addEmployeeDeatils(@RequestBody Employee employee)
@@ -33,12 +32,9 @@ public class EmployeeController
 	}
 	
 	@GetMapping("/user")
-	public List<Employee> getAllEmployeeDeatils(
-			@RequestParam(value = "pageNumber",defaultValue = "0",required = false) Integer pageNumber,
-            @RequestParam(value = "pageSize",defaultValue = "5",required = false) Integer pageSize
-			)
+	public List<Employee> getAllEmployeeDeatils()
 	{
-		return employeeService.getAllUsers2(pageNumber,pageSize);
+		return employeeService.getAllUsers();
 	}
 	
 	@GetMapping("/getDeprt")

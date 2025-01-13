@@ -18,8 +18,15 @@
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br><br>
 
-        <label for="department">Department:</label>
-        <input type="text" id="department" name="department" required><br><br>
+		<label for="departmentFilter">Filter by Department: </label>
+					    <select id="department">
+					        <option value="">Departments</option>
+					        <!-- Add departments dynamically or manually -->
+					        <option value="IT" required>IT</option>
+					        <option value="HR">HR</option>
+					        <option value="Finance">Finance</option>
+					        <option value="Marketing">Marketing</option>
+					    </select><br><br>
 
         <label for="designation">Designation:</label>
         <input type="text" id="designation" name="designation" required><br><br>

@@ -19,4 +19,10 @@ public class EmployeeDataController {
 	
 		return "edit-employee";
 	}
+	
+	@GetMapping("/index")
+	public String openIndex()
+	{
+		return "index";
+	}
 }
